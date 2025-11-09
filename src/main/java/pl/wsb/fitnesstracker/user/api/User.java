@@ -21,6 +21,12 @@ public class User {
     @Nullable
     private Long id;
 
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthdate;
 
