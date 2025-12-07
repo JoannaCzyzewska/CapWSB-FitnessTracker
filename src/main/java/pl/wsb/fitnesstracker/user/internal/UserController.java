@@ -1,13 +1,16 @@
 package pl.wsb.fitnesstracker.user.internal;
 
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.wsb.fitnesstracker.user.api.User;
 import pl.wsb.fitnesstracker.user.api.UserDto;
+import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
 import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * UserController is responsible for handling HTTP requests related to user operations.
@@ -36,6 +39,18 @@ class UserController {
                 .stream()
                 .map(userMapper::toSimpleDto)
                 .toList();
+    }
+
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable Long id) {
+        User user = userService.findUserById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        return userMapper.toDto(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUserById(@PathVariable Long id) {
+        userService.deleteById(id);
     }
 }
 
