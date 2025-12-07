@@ -3,10 +3,7 @@ package pl.wsb.fitnesstracker.user.internal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.wsb.fitnesstracker.user.api.User;
-import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
-import pl.wsb.fitnesstracker.user.api.UserProvider;
-import pl.wsb.fitnesstracker.user.api.UserService;
+import pl.wsb.fitnesstracker.user.api.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +15,7 @@ import java.util.Optional;
 class UserServiceImpl implements UserService, UserProvider {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public User createUser(final User user) {
@@ -52,5 +50,11 @@ class UserServiceImpl implements UserService, UserProvider {
             throw new UserNotFoundException(id);
         }
         userRepository.deleteById(id);
+    }
+
+    public UserDto createUser(UserRequestDto userRequest) {
+        User entity = userMapper.toEntity(userRequest);
+        User savedEntity = userRepository.save(entity);
+        return userMapper.toDto(savedEntity);
     }
 }

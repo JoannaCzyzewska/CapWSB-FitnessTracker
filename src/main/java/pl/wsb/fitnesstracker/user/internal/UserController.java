@@ -2,11 +2,9 @@ package pl.wsb.fitnesstracker.user.internal;
 
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.wsb.fitnesstracker.user.api.User;
-import pl.wsb.fitnesstracker.user.api.UserDto;
-import pl.wsb.fitnesstracker.user.api.UserNotFoundException;
-import pl.wsb.fitnesstracker.user.api.UserSimpleDto;
+import pl.wsb.fitnesstracker.user.api.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -51,6 +49,12 @@ class UserController {
     @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable Long id) {
         userService.deleteById(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDto createUser(@RequestBody UserRequestDto userRequest) {
+        return userService.createUser(userRequest);
     }
 }
 
