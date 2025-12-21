@@ -44,5 +44,9 @@ public class User {
         this.birthdate = birthdate;
         this.email = email;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 }
 

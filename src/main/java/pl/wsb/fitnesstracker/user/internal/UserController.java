@@ -27,6 +27,11 @@ class UserController {
 
     private final UserMapper userMapper;
 
+    /**
+     * Retrieves a list of all users.
+     *
+     * @return a list of {@link UserDto} representing all users
+     */
     @GetMapping
     public List<UserDto> getAllUsers() {
         return userService.findAllUsers()
@@ -35,6 +40,11 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Retrieves a list of simple user representations containing only ID and name.
+     *
+     * @return a list of {@link UserSimpleDto} with minimal user info
+     */
     @GetMapping("/simple")
     public List<UserSimpleDto> getAllUsersIDNames() {
         return userService.findAllUsers()
@@ -43,6 +53,13 @@ class UserController {
                 .toList();
     }
 
+    /**
+     * Retrieves a specific user by their unique ID.
+     *
+     * @param id the ID of the user to retrieve
+     * @return a {@link UserDto} representing the found user
+     * @throws UserNotFoundException if no user exists with the given ID
+     */
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable Long id) {
         User user = userService.findUserById(id)
@@ -50,15 +67,70 @@ class UserController {
         return userMapper.toDto(user);
     }
 
+    /**
+     * Deletes a user by their unique ID.
+     *
+     * @param id the ID of the user to delete
+     */
     @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable Long id) {
         userService.deleteById(id);
     }
 
+    /**
+     * Creates a new user from the provided request data.
+     *
+     * @param userRequest the DTO containing user creation data
+     * @return a {@link UserDto} representing the newly created user
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createUser(@RequestBody UserRequestDto userRequest) {
         return userService.createUser(userRequest);
     }
+
+    /**
+     * Searches for users whose email contains the given fragment (case-insensitive).
+     *
+     * @param emailFragment partial email string to search for
+     * @return a list of {@link UserIdEmailDto} matching the email fragment
+     */
+    @GetMapping("/email/{emailFragment}")
+    public List<UserIdEmailDto> getUsersByEmailFragment(@PathVariable String emailFragment) {
+        return userService.getUsersByEmailFragment(emailFragment)
+                .stream()
+                .map(userMapper::toUserIdEmailDto)
+                .toList();
+    }
+
+    /**
+     * Retrieves all users older than the specified age.
+     *
+     * @param age the minimum age (exclusive) for user selection
+     * @return a list of {@link UserDto} for users older than {@code age}
+     */
+    @GetMapping("/older/{age}")
+    public List<UserDto> getUsersOlderThan(@PathVariable int age) {
+        return userService.getUsersOlderThan(age)
+                .stream()
+                .map(userMapper::toDto)
+                .toList();
+    }
+
+    /**
+     * Updates the name of an existing user.
+     *
+     * @param id the ID of the user to update
+     * @param name the new name to assign
+     * @return a {@link UserDto} representing the updated user
+     */
+    @PutMapping("/{id}")
+    public UserDto updateUserName(@PathVariable Long id,
+                                  @RequestParam String name) {
+        User updatedUser = userService.updateUserName(id, name);
+
+        return userMapper.toDto(updatedUser);
+    }
+
 }
 
