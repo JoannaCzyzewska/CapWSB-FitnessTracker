@@ -7,11 +7,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import pl.wsb.fitnesstracker.mail.api.EmailDto;
 import pl.wsb.fitnesstracker.mail.api.EmailSender;
-import pl.wsb.fitnesstracker.training.api.Training;
-import pl.wsb.fitnesstracker.user.api.User;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor

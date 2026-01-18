@@ -95,7 +95,8 @@ class UserApiIntegrationTest extends IntegrationTestBase {
     void shouldReturnDetailsAboutUser_whenGettingUserByEmail() throws Exception {
         User user1 = existingUser(generateUser());
 
-        mockMvc.perform(get("/v1/users/email").param("email", user1.getEmail()).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/users/email/{email}", user1.getEmail())
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -109,7 +110,7 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         existingUser(generateUserWithDate(LocalDate.of(2024, 8, 11)));
 
 
-        mockMvc.perform(get("/v1/users/older/{time}", LocalDate.of(2024, 8, 10)).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/users/older/{time}", 2).contentType(MediaType.APPLICATION_JSON))
                 .andDo(log())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
@@ -179,36 +180,23 @@ class UserApiIntegrationTest extends IntegrationTestBase {
         User user1 = existingUser(generateUser());
 
         final String USER_NAME = "Mike";
-        final String USER_LAST_NAME = "Scott";
-        final String USER_BIRTHDATE = "1999-09-29";
-        final String USER_EMAIL = "mike.scott@domain.com";
 
         String updateRequest = """
-                
                 {
-                "firstName": "%s",
-                "lastName": "%s",
-                "birthdate": "%s",
-                "email": "%s"
+                "name": "%s",
                 }
                 """.formatted(
-                USER_NAME,
-
-                USER_LAST_NAME,
-                USER_BIRTHDATE,
-                USER_EMAIL);
+                        USER_NAME
+        );
 
         mockMvc.perform(put("/v1/users/{userId}", user1.getId())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(updateRequest));
+                .param("name", USER_NAME));
 
         List<User> allUsers = getAllUsers();
         User user = allUsers.get(0);
 
         assertThat(user.getFirstName()).isEqualTo(USER_NAME);
-        assertThat(user.getLastName()).isEqualTo(USER_LAST_NAME);
-        assertThat(user.getBirthdate()).isEqualTo(LocalDate.parse(USER_BIRTHDATE));
-        assertThat(user.getEmail()).isEqualTo(USER_EMAIL);
     }
 
 

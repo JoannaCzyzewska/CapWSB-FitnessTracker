@@ -142,6 +142,30 @@ class InitialDataLoader {
                     ActivityType.RUNNING,
                     11.8,
                     8.5);
+            Training training11 = new Training(users.get(0),
+                    sdf.parse("2026-01-10 14:00:00"),
+                    sdf.parse("2026-01-10 15:15:00"),
+                    ActivityType.RUNNING,
+                    23.2,
+                    10.2);
+            Training training12 = new Training(users.get(1),
+                    sdf.parse("2026-01-09 06:00:00"),
+                    sdf.parse("2026-01-09 07:30:00"),
+                    ActivityType.RUNNING,
+                    8.1,
+                    5.0);
+            Training training13 = new Training(users.get(3),
+                    sdf.parse("2026-01-11 13:00:00"),
+                    sdf.parse("2026-01-11 14:00:00"),
+                    ActivityType.RUNNING,
+                    10.2,
+                    9.6);
+            Training training14 = new Training(users.get(4),
+                    sdf.parse("2026-01-12 10:00:00"),
+                    sdf.parse("2026-01-12 10:15:00"),
+                    ActivityType.RUNNING,
+                    5.8,
+                    7.5);
 
             trainingData.add(training1);
             trainingData.add(training2);
@@ -153,6 +177,10 @@ class InitialDataLoader {
             trainingData.add(training8);
             trainingData.add(training9);
             trainingData.add(training10);
+            trainingData.add(training11);
+            trainingData.add(training12);
+            trainingData.add(training13);
+            trainingData.add(training14);
 
             trainingRepository.saveAll(trainingData);
         } catch (ParseException e) {
