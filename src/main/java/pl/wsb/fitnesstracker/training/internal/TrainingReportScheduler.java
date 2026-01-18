@@ -13,8 +13,7 @@ public class TrainingReportScheduler {
     private TrainingReportService trainingReportService;
 
     // Every week on Sunday 23:59
-//    @Scheduled(cron = "0 59 23 ? * SUN")
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 59 23 ? * SUN")
     public void generateWeeklyReport() {
         trainingReportService.generateWeeklyReport();
     }
