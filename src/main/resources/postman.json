@@ -1,108 +1,9 @@
 {
   "info": {
-    "name": "capwsp-fitnesstracker",
+    "name": "capwsb-fitnesstracker",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
-    {
-      "name": "getUsers",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "auth": {
-          "type": "noauth"
-        },
-        "description": "",
-        "url": {
-          "raw": "http://localhost:8080/v1/users",
-          "protocol": "http",
-          "host": [
-            "localhost:8080"
-          ],
-          "path": [
-            "v1",
-            "users"
-          ],
-          "query": [],
-          "variable": []
-        }
-      }
-    },
-    {
-      "name": "getUsersSimple",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "auth": {
-          "type": "noauth"
-        },
-        "description": "",
-        "url": {
-          "raw": "http://localhost:8080/v1/users/simple",
-          "protocol": "http",
-          "host": [
-            "localhost:8080"
-          ],
-          "path": [
-            "v1",
-            "users",
-            "simple"
-          ],
-          "query": [],
-          "variable": []
-        }
-      }
-    },
-    {
-      "name": "getUsersById",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "auth": {
-          "type": "noauth"
-        },
-        "description": "",
-        "url": {
-          "raw": "http://localhost:8080/v1/users/1",
-          "protocol": "http",
-          "host": [
-            "localhost:8080"
-          ],
-          "path": [
-            "v1",
-            "users",
-            "1"
-          ],
-          "query": [],
-          "variable": []
-        }
-      }
-    },
-    {
-      "name": "deleteUser",
-      "request": {
-        "method": "DELETE",
-        "header": [],
-        "auth": {
-          "type": "noauth"
-        },
-        "description": "",
-        "url": {
-          "raw": "http://localhost:8080/v1/users/11",
-          "protocol": "http",
-          "host": [
-            "localhost:8080"
-          ],
-          "path": [
-            "v1",
-            "users",
-            "11"
-          ],
-          "query": [],
-          "variable": []
-        }
-      }
-    },
     {
       "name": "createUser",
       "request": {
@@ -137,7 +38,32 @@
       }
     },
     {
-      "name": "getUsersOlder",
+      "name": "deleteUser",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/v1/users/11",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "11"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "getUsers",
       "request": {
         "method": "GET",
         "header": [],
@@ -146,16 +72,14 @@
         },
         "description": "",
         "url": {
-          "raw": "http://localhost:8080/v1/users/older/40",
+          "raw": "http://localhost:8080/v1/users",
           "protocol": "http",
           "host": [
             "localhost:8080"
           ],
           "path": [
             "v1",
-            "users",
-            "older",
-            "40"
+            "users"
           ],
           "query": [],
           "variable": []
@@ -189,6 +113,82 @@
       }
     },
     {
+      "name": "getUsersById",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/v1/users/1",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "1"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "getUsersOlder",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/v1/users/older/40",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "older",
+            "40"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "getUsersSimple",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/v1/users/simple",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "v1",
+            "users",
+            "simple"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
       "name": "updateUserFirstName",
       "request": {
         "method": "PUT",
@@ -214,6 +214,55 @@
               "value": "Andrzej"
             }
           ],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "getTrainings",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "v1",
+            "trainings"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "getTrainingsForDedicatedUser",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http://localhost:8080/v1/trainings/5",
+          "protocol": "http",
+          "host": [
+            "localhost:8080"
+          ],
+          "path": [
+            "v1",
+            "trainings",
+            "5"
+          ],
+          "query": [],
           "variable": []
         }
       }
