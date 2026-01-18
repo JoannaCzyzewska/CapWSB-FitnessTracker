@@ -53,6 +53,10 @@ public class TrainingReportService {
                     EmailDto email = generateEmailDto(user, weeklyTrainings, totalTrainings, weekStart, weekEnd);
                     emailSender.send(email);
                     emailsSent++;
+
+                    if (emailsSent < users.size()) {
+                        Thread.sleep(1000);
+                    }
                 }
 
             } catch (Exception e) {
